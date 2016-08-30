@@ -43,7 +43,7 @@ public class UserController {
 	
 	@RequestMapping( value="/login", method=RequestMethod.POST )
 	public String login(
-		HttpSession session,	
+		HttpSession session,
 		@RequestParam( value = "email", required=false, defaultValue="" ) String email,
 		@RequestParam( value="password", required=false, defaultValue="" ) String password
 		){
@@ -58,4 +58,13 @@ public class UserController {
 		
 		return "redirect:/main";
 	}
+	
+	@RequestMapping( "/logout")
+	public String logout( HttpSession session ) {
+		session.removeAttribute( "authUser" );
+		session.invalidate();
+		
+		return "redirect:/main";
+	}
+	
 }
